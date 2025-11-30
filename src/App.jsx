@@ -1,19 +1,20 @@
 import { useState } from "react"
 import Header from "./Header"
 import Sidebar from "./Sidebar"
-import TaskBoard from "./TaskBoard"
-
+import TaskBoard from "./Task/TaskBoard";
+import { defaultTasks } from "./data";
 function App() {
-  const [showAddTask, SetShowAddTask]= useState(true);
+  const [showAddTask, setShowAddTask]= useState(false);
+  const [tasks, setTasks]= useState([...defaultTasks]);
   return (
     <>
         <div className="min-h-screen flex flex-col lg:flex-row">
           <Sidebar></Sidebar>
           <main className="flex-1 flex flex-col min-h-0">
-            <Header></Header>
+            <Header setTasks={setTasks} setShowAddTask={setShowAddTask}></Header>
             <TaskBoard
               showAddTask={showAddTask}
-              SetShowAddTask={SetShowAddTask}
+              tasks={tasks}
             />
           </main>
         </div>
